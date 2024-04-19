@@ -5,12 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Frame properties -->
     <meta property="fc:frame" content="vNext" />
-    <!-- Add the image URL meta tag -->
-    <meta property="fc:frame:image" content="https://www.pngmart.com/files/5/Abstract-Colors-PNG-Picture.png" />
-    <meta property="og:image" content="https://www.pngmart.com/files/5/Abstract-Colors-PNG-Picture.png" />
+    <!-- Add the image URL meta tag with a simple background image -->
+    <meta property="fc:frame:image" content="simple-background.png" />
+    <meta property="og:image" content="simple-background.png" />
     <title>Ethereum Gas Fee Tracker</title>
+    <style>
+        /* Add styles for the button */
+        #fetch-gas-button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        /* Style for the gas fees display */
+        #gas-fees {
+            display: none;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
+    <!-- Button to fetch gas fees -->
+    <button id="fetch-gas-button" onclick="fetchGasFees()">Show Gas Fees</button>
     <div id="gas-fees">
         <!-- Gas fees will be displayed here -->
     </div>
@@ -33,12 +52,11 @@
                         <p>Proposed Gas Fee: <strong>${proposeGasFee} Gwei</strong></p>
                         <p>Fast Gas Fee: <strong>${fastGasFee} Gwei</strong></p>
                     `;
+                    // Show the gas fees div
+                    document.getElementById('gas-fees').style.display = 'block';
                 })
                 .catch(error => console.error('Error fetching gas fees:', error));
         }
-
-        // Fetch gas fees on load
-        window.onload = fetchGasFees;
     </script>
 </body>
 </html>

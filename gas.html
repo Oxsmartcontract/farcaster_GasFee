@@ -8,18 +8,10 @@
     <!-- Add the image URL meta tag with a simple background image -->
     <meta property="fc:frame:image" content="https://raw.githubusercontent.com/Oxsmartcontract/farcaster_GasFee/main/OIG2.png" />
     <meta property="og:image" content="https://raw.githubusercontent.com/Oxsmartcontract/farcaster_GasFee/main/OIG2.png" />
+    <!-- Farcaster button meta tag -->
+    <meta property="fc:frame:button:0:target" content="fetchGasFees" />
     <title>Ethereum Gas Fee Tracker</title>
     <style>
-        /* Add styles for the button */
-        #fetch-gas-button {
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
         /* Style for the gas fees display */
         #gas-fees {
             display: none;
@@ -28,8 +20,6 @@
     </style>
 </head>
 <body>
-    <!-- Button to fetch gas fees -->
-    <button id="fetch-gas-button" onclick="fetchGasFees()">Show Gas Fees</button>
     <div id="gas-fees">
         <!-- Gas fees will be displayed here -->
     </div>

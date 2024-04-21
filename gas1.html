@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethereum Gas Fee Tracker</title>
+    <style>
+        /* Style for the gas fees display */
+        #gas-fees {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="gas-fees">
+        <!-- Gas fees will be displayed here -->
+    </div>
+    <script>
+        // Define the API endpoint
+        const apiEndpoint = 'https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=F6N6HXW2CRVTX6R3PZ5UARPVD1PHWMJE3R';
+
+        // Function to fetch and display gas fees
+        function fetchGasFees() {
+            fetch(apiEndpoint)
+                .then(response => response.json())
+                .then(data => {
+                    const safeGasFee = data.result.SafeGasPrice;
+                    const proposeGasFee = data.result.ProposeGasPrice;
+                    const fastGasFee = data.result.FastGasPrice;
+
+                    // Display the gas fees in the div
+                    document.getElementById('gas-fees').innerHTML = `
+                        <p>Safe Gas Fee: <strong>${safeGasFee} Gwei</strong></p>
+                        <p>Proposed Gas Fee: <strong>${proposeGasFee} Gwei</strong></p>
+                        <p>Fast Gas Fee: <strong>${fastGasFee} Gwei</strong></p>
+                    `;
+                })
+                .catch(error => console.error('Error fetching gas fees:', error));
+        }
+
+        // Call fetchGasFees when the frame is loaded
+        window.onload = fetchGasFees;
+    </script>
+</body>
+</html>

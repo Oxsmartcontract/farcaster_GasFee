@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ethereum Gas Fee Tracker</title>
+  <!-- Frame properties -->
+  <meta property="fc:frame" content="vNext" />
+  <!-- Add the image URL meta tag with a simple background image -->
+  <meta property="fc:frame:image" content="https://your-image-url.jpg" />
+  <!-- Farcaster button meta tag -->
+  <meta property="fc:frame:button:0:target" content="fetchGasFees" />
+  <style>
+    /* Style for the frame content */
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 50px;
+    }
+    #gas-fees {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome to the Gas Fee Tracker!</h1>
+  <p>Click the button below to fetch Ethereum gas fees:</p>
+  <button onclick="fetchGasFees()">Fetch Gas Fees</button>
+  <div id="gas-fees">
+    <!-- Gas fees will be displayed here -->
+  </div>
+
+  <script>
+    // Function to fetch and display gas fees
+    function fetchGasFees() {
+      const apiEndpoint = 'https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=YourEtherscanAPIKey';
+      fetch(apiEndpoint)
+        .then(response => response.json())
+        .then(data => {
+          const safeGasFee = data.result.SafeGasPrice;
+          const proposeGasFee = data.result.ProposeGasPrice;
+          const fastGasFee = data.result.FastGasPrice;
+
+          // Display the gas fees in the div
+          const gasFeesElement = document.getElementById('gas-fees');
+          gasFeesElement.innerHTML = `
+            <p>Safe Gas Fee: <strong>${safeGasFee} Gwei</strong></p>
+            <p>Proposed Gas Fee: <strong>${proposeGasFee} Gwei</strong></p>
+            <p>Fast Gas Fee: <strong>${fastGasFee} Gwei</strong></p>
+          `;
+          gasFeesElement.style.display = 'block';
+        })
+        .catch(error => console.error('Error fetching gas fees:', error));
+    }
+  </script>
+</body>
+</html>
